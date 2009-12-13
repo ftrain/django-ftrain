@@ -14,6 +14,7 @@ The code will most likely be useful for cutting-and-pasting, as it's rather spec
 
 TODO
 ----
+- Everything
 - Document everything
 - List dependencies
 - Comment code
@@ -24,5 +25,6 @@ TODO
 - Make Haystack an option rather than the only way to display things
 - Get caching fixed
 - Make it possible to launch from the command line with a working django
-
+- Separate out apps and release as individual projects (I.e. setup.py
+  and post to PyPI)
 
