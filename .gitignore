@@ -1,0 +1,15 @@
+*~
+*.pyc
+\#*
+.\#*
+*_log
+.DS_Store
+logs/
+*/src/
+*/trunk/
+*/env/
+*/.svn/
+*.sq3
+./solr/
+
+
