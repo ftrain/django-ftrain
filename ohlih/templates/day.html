@@ -1,0 +1,140 @@
+{% extends 'ohlih_base.html' %}
+
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+{% block title %}Calories consumed and expended.--{{events.0.time|date:"l, F j, Y"}}. (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+{% if events %}
+{% regroup events|dictsortreversed:"time" by time.date as grouped %}
+{% for day in grouped|slice:":1" %}
+<table summary="Diary for {{day.list.0.time.date}}" class="ohlih" cellspacing="0">
+  <thead>
+    <tr>
+
+
+      <th class="table-header" rowspan="3" colspan="2">
+	    <a href="/ohlih/{{day.list.0.time.date|date:"Y/m/d"}}">{{day.list.0.time.date|date:"l, F j, Y"}}.&mdash;<span class="diary">Diary</span>.</a>
+      </th>
+      <td colspan="2" class="c bg"
+        {% if '2009-08-31'|to_date < day.list.0.time.date %} 
+          style="height:50px;background:url('/ohlih/charts/weight_from_{{day.list.0.time.date|date:"Y-01-01"}}_to_{{day.list.0.time.date|date:"Y-m-d"}}11.png');background-position:-10px 5px;background-repeat:no-repeat;"
+        {% endif %}
+        >
+
+	    <span class="nobr"><a href="/ohlih/{{day.list.0.time.date|date:"Y"}}">{{day.list.0.time.date|date:"Y"}}</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="c x bg" 
+        {% if '2009-08-31'|to_date < day.list.0.time.date %} 
+        style="height:50px;background:url('/ohlih/charts/weight_from_{{day.list.0.time.date|last_month|date:"Y-m-d"}}_to_{{day.list.0.time.date|date:"Y-m-d"}}10.png');background-position:-10px 5px;background-repeat:no-repeat;"
+        {% endif %}
+        >
+	    <span class="nobr"><a href="/ohlih/{{day.list.0.time.date|date:"Y/m"}}">{{day.list.0.time.date|date:"F"}}</a></span>
+
+
+
+
+
+      </td>
+    </tr>
+    <tr>
+      <td class="c bg x">
+	{{ day|previous_day|safe }}
+      </td>
+      <td class="c bg x">
+	{{ day|next_day|safe }}
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"></td>
+      <th class="s">Kilocal.</th>	
+      <th class="s">Quant.</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in day.list|dictsort:"time" %}
+    <tr>
+      <td class="r"><a class="anchor" name="{{event.time|date:"H:i"}}" title="">{{event.event_name}}</a></td>
+      <td class="talk">
+
+{% if event.image_set.all.0 %}
+<p><a href="{{event.image_set.all.0.original_image.url}}"><img src="{{event.image_set.all.0.ohlih_image.url}}" width="360" title="{{event.image_set.all.0.name}}"/></a></p>
+{% endif %}
+{{event.commentary|hyphenate|fix_type_pre|markdown|smartypants|fix_type_post|safe}}</td>
+      <td class="c"></td>
+      <td class="c"></td>
+    </tr>
+    {% for food in event.consumption_set.all %}
+    <tr>
+      <td class="r">''</td>
+      <td class="dotted">
+	<div class="foodItem">
+	  <span class="food"><a href="/ohlih/kcal/{{food.of_energy.id}}">{{food.of_energy.name|fix_type_pre|markdown|smartypants|fix_type_post|strip_paras|safe}}</a></span>
+	</div>
+      </td>
+
+      <td class="c{%if food.of_energy.kcal < 0%} neg{%endif%}">
+	{{food.of_energy.kcal|commas:'%i'|safe}}
+      </td>
+      <td class="c">
+	{{food.quantity|fractionalize|safe}}
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="2"></td>
+      <td colspan="2" class="sum{%if event.food_set.all|sum_calories < 0%} neg{%endif%} double">{{event.consumption_set.all|sum_calories|commas:'%i'|safe}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td class="r" colspan="2"></td>
+      <td colspan="2" class="totalsum">
+	<div class="hand">&#x261E;</div>
+	{% for total in day.list|sum_daily_calories %}
+	{% if forloop.first %}
+  	<i title="Total number of calories consumed">Total</i> {{total|commas:'%i'|safe}}
+	{% else %}
+ 	<i>({{total|commas:'%i'|safe}})</i>
+	{% endif %}
+	{% endfor %}
+	{% for total in day.list|sum_daily_calories %}
+	{% if forloop.first %}
+	<br/><i title="Number of calories outstanding, from a base of {{0|remaining|commas:'%i'}}">O/s</i> [{{0|remaining|commas:'%i'}}] {{total|remaining|commas:'%i'|safe}}
+	{% else %}
+ 	<i>({{total|remaining|commas:'%i'|safe}})</i>
+	{% endif %}
+	{% endfor %}
+    </td>
+    </tr>
+
+    <tr>
+      <td class="c bg x">
+	<span class="nobr"><a href="/ohlih/{{day.list.0.time.date|date:"Y"}}">{{day.list.0.time.date|date:"Y"}}</a></span>
+      </td>
+      <td class="c bg x">
+	<span class="nobr"><a href="/ohlih/{{day.list.0.time.date|date:"Y/m"}}">{{day.list.0.time.date|date:"F"}}</a></span>
+      </td>
+      <td class="c bg x">
+	{{ day|previous_day|safe }}
+      </td>
+      <td class="c bg x">
+	{{ day|next_day|safe }}
+      </td>
+    </tr>
+
+    </tr>
+
+
+
+
+  </tbody>
+</table>
+{% endfor %}
+{% endif %}
+{% endblock %}

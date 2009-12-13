@@ -1,0 +1,70 @@
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+
+
+<table summary="Diary for {{object.time.date}}" class="ohlih" cellspacing="0">
+  <thead>
+    <tr>
+      <th class="table-header" rowspan="3" colspan="2">
+	    <a href="/ohlih/{{object.time.date|date:"Y/m/d"}}">{{object.time.date|date:"l, F j, Y"}}.&mdash;<span class="diary">Diary</span>.</a>
+      </th>
+      <td colspan="2" class="c bg">
+
+	    <span class="nobr"><a href="/ohlih/{{object.time.date|date:"Y"}}">{{object.time.date|date:"Y"}}</a></span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="c x bg">
+	    <span class="nobr"><a href="/ohlih/{{object.time.date|date:"Y/m"}}">{{object.time.date|date:"F"}}</a></span>
+      </td>
+    </tr>
+    <tr>
+      <th class="s">Kilocal.</th>	
+      <th class="s">Quant.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="r"><a class="anchor" name="{{object.time|date:"H:i"}}" title="">{{object.event_name}}</a></td>
+      <td class="talk">
+
+{% if object.image_set.all.0 %}
+<p><a href="{{object.image_set.all.0.original_image.url}}"><img src="{{object.image_set.all.0.ohlih_image.url}}" width="360" title="{{object.image_set.all.0.name}}"/></a></p>
+{% endif %}
+{{object.commentary|fix_type_pre|markdown|smartypants|fix_type_post|safe}}</td>
+      <td class="c"></td>
+      <td class="c"></td>
+    </tr>
+    {% for food in object.consumption_set.all %}
+    <tr>
+      <td class="r">''</td>
+      <td class="dotted">
+	<div class="foodItem">
+	  <span class="food"><a href="/ohlih/kcal/{{food.of_energy.id}}">{{food.of_energy.name|fix_type_pre|markdown|smartypants|fix_type_post|strip_paras|safe}}</a></span>
+	</div>
+      </td>
+
+      <td class="c{%if food.of_energy.kcal < 0%} neg{%endif%}">
+	{{food.of_energy.kcal|commas:'%i'|safe}}
+      </td>
+      <td class="c">
+	{{food.quantity|fractionalize|safe}}
+      </td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td colspan="2"></td>
+      <td colspan="2" class="sum{%if object.food_set.all|sum_calories < 0%} neg{%endif%} double">{{object.consumption_set.all|sum_calories|commas:'%i'|safe}}</td>
+    </tr>
+    </tr>
+
+
+
+
+  </tbody>
+</table>
+

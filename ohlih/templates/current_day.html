@@ -1,0 +1,43 @@
+{% extends 'ohlih_base.html' %}
+
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+{% block title %}Calories consumed and expended.--{{events.0.time|date:"l, F j, Y"}}. (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+
+<p>Here it is</p>
+
+
+
+<div style="color:black;">
+
+{% regroup consumpts by in_event as events_list %}
+
+{% for event in events_list %}
+
+<br/>
+<h3>{{event.grouper}}</h3>
+
+{{event.grouper.image_set.all.0}}
+
+{% for item in event.list %}
+
+<br/>{{ item }}
+
+{% endfor %}
+
+<hr/>
+
+{% endfor %}
+
+
+
+
+</div>
+<p>That was it</p>
+
+{% endblock %}

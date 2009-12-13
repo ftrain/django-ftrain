@@ -1,0 +1,21 @@
+{% extends 'simple.html' %}
+
+{% block content %}
+{% if posts %}
+{% for post in posts %}
+
+<div class="post ftrain">
+  <h3>{{post.title}}</h3>
+  
+  Author: 
+  {% for by in post.by_set.all %}
+  <p>{{by}}</p>
+  {% endfor %}
+  
+  {{ post.text|safe }}
+</div>
+
+{% endfor %}
+{% endif %}
+{% endblock %}
+

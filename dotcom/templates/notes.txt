@@ -1,0 +1,48 @@
+
+              <h2>Dear friends</h2>
+              <p><i>By Paul Ford &middot; January 10, 2010, 4:30pm</i></p>
+
+            <img src="http://www.ftrain.com/media/photos/lit_wreath.jpg" style="border:3px double black;width:360px;float:left;margin-right:1em;"/>
+            
+              <p class="first">I decided in July of 2009 to reconfigure certain parts of my existence. I had many projects underway but few of them were close to finished. I was spending hours listening to old radio programs and thinking about the way technology influences popular culture but I was incapable of externalizing my ideas, of discussing them or writing them down. I was becoming ever more paranoid, and fearful of strangers. My wife was out of work and I felt trapped by that. I weighed approximately 370 pounds and was on cholesterol and heart medications. The riverbed was dry but still I was wading.</p>
+
+              <p>In response I became a kind of willing cyborg. I built a note-taking system. I lost 70 pounds with many more to go. Noting the pleasure I found in writing through the very boring work of losing weight I decided to build other systems to manage my other obsessions as they relate to entertainment, form, and prose. I can do much more now. The code is <a href="/dotcom/code">open-sourced</a> if you want it. Not packaged up yet, though.</p>
+
+              <p>I have been here writing for 12 years. Preparing to re-launch I read through my prose. I thought it would be painful, and sometimes it was. But then I'd find something I'd forgotten entirely, like [this piece about outsourcing](TheWorkers).</p>
+
+              <p>I can see myself waiting for adults to show up and either take away the web or reward me in some way. Waiting for the approval of adults. Somewhere in there I became one of them, of the adults. But I would like to come back and be here for a while. Why bother? Why give it away? I have learned that the things I love will eat me alive if I do not give them away. I have much to learn.</p>
+
+<p>Love should be easy; work should be hard.</p>
+
+            </div>
+
+            <div class="post">
+
+              <h2>Dear friends</h2>
+              <p><i>By Paul Ford &middot; January 10, 2010, 4:30pm</i></p>
+
+            <p>Not long before I realized that this Mr. Bowkett's prose--<i>and if you look at his presentations</i> you'll see the same--shows a powerful influence from presentation ethos. Entertain and illustrate. It is filled with cognitive enrichment. Yegge's rhetorical approach is similar. They are presenting.</b> This is not a <i>criticism; just an observation</i>. In fact I think it's a natural offshoot of another phenomenon I've observed--that of defensive prose.</p>
+
+            <p>Computers are faking it.</p>
+
+            <p>Layers of abstraction and replace that with "consensus."</p>
+
+            <p>We've standardized consensus in the standards process. Standards are a kind of sovereign territory.</p>
+
+            <p>This is.</p>
+
+            <p><i>Layers of Consensus</i></p>
+
+            <p>Middle-class.</p>
+
+            <p>Post-consumer communities.</p>
+
+            <p>Counterculture; computing.</p>
+
+            <h2>Alan Kay on Culture</h2>
+            <p>Alan Kay.</p>
+
+            <p>(There is a parallel history of popular entertainment.)</p>
+
+            <h2>Layers of consensus</h2>
+            <p>Because life is joy.</p>

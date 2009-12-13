@@ -1,0 +1,66 @@
+{% extends 'ohlih_base.html' %}
+{% load markup %}
+
+{% block content %}
+
+
+    <h2>Search</h2>
+<style type="text/css">
+.dotcom {font-size:11.5pt;max-width:500px;line-height:159%;border-top:3px double black;padding-top:1em;}
+
+</style>
+
+<form method="get" action=".">
+    <table>
+        <tbody>
+            {{ form.as_table }}
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Search"></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+
+<div style="background:white;color:black;">
+{% if query %}
+    <!-- Begin faceting. -->
+    <h2>By Type</h2>
+
+    <div>
+        <dl>
+            {% if facets.fields.title %}
+                <dt>Type</dt>
+                {# Provide only the top 10 titles #}
+                {% for title in facets.fields.title|slice:":10" %}
+                    <a href="{{ request.get_full_path }}q={{query}}&amp;selected_facets=title:{{ title.0|urlencode }}">{{ title.0 }}</a> ({{ title.1 }}) 
+                {% endfor %}
+            {% else %}
+                <p>No facets.</p>
+            {% endif %}
+        </dl>
+    </div>
+
+</div>
+    <!-- End faceting -->
+
+    <!-- Display results... -->
+{% if page.object_list %}
+<h3>Results</h3>
+{% for result in page.object_list %}
+<p style="font-size:12pt;">
+  {{ result.text_cache|safe }}
+</p>
+{% empty %}
+<p>There are no results.</p>
+{% endfor %}
+
+{% endif %}
+
+{% endif %}
+
+
+    </form>
+    {% endblock %}
+    

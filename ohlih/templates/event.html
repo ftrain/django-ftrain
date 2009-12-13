@@ -1,0 +1,27 @@
+    <tr>
+      <td class="r"><a class="anchor" name="{{event.time|date:"H:i"}}" title="">{{event.event_name}}</a></td>
+      <td class="talk">
+
+{% if event.image_set.all.0 %}
+<p><a href="{{event.image_set.all.0.original_image.url}}"><img src="{{event.image_set.all.0.ohlih_image.url}}" alt="{{event.image_set.all.0.name}}" width="360"/></a></p>
+{% endif %}
+{{event.commentary|hyphenate|fix_type_pre|markdown|smartypants|fix_type_post|safe}}</td>
+      <td class="c"></td>
+      <td class="c"></td>
+    </tr>
+    {% for food in event.consumption_set.all %}
+    <tr>
+      <td class="r">''</td>
+      <td class="dotted">
+	<div class="foodItem">
+	  <span class="food"><a href="/ohlih/kcal/{{food.of_energy.id}}">{{food.of_energy.name|fix_type_pre|markdown|smartypants|fix_type_post|strip_paras|safe}}</a></span>
+	</div>
+      </td>
+
+      <td class="c{%if food.of_energy.kcal < 0%} neg{%endif%}">
+	{{food.of_energy.kcal|commas:'%i'|safe}}
+      </td>
+      <td class="c">
+	{{food.quantity|fractionalize|safe}}
+      </td>
+    </tr>

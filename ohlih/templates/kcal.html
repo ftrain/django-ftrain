@@ -1,0 +1,63 @@
+{% extends 'ohlih_base.html' %}
+
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+{% block title %}{{name.0.name}} (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+
+<table class="ohlih">
+  <tr>
+    <th class="table-header" colspan="2">
+      <h4>{{name.0.name}}&mdash;{{name.0.kcal}} kcal.</h4>
+    <th class="s">Kilocal.</th>	
+    <th class="s">Quant.</th>
+  </tr>
+
+  
+  {% for event in events %}
+
+    <tr>
+      <td class="r x"><a href="/ohlih/{{event.time|date:"Y/m/d#H:i"}}" title="">{{event.event_name}}
+	  <br/>
+{{event.time|date:"M d 'y @ g:i A"}}</a></td>
+      <td class="talk x">
+
+	{% if event.image_set.all.0 %}
+	<p><img src="{{event.image_set.all.0.ohlih_image.url}}" width="360"/></p>
+	{% endif %}
+	
+	{{event.commentary|hyphenate|fix_type_pre|markdown|smartypants|fix_type_post|safe}}</td>
+      <td class="c x"></td>
+      <td class="c x"></td>
+    </tr>
+    {% for food in event.consumption_set.all %}
+    <tr>
+      <td class="r">''</td>
+      <td class="dotted">
+	<div class="foodItem">
+	  <span class="food"><a href="/ohlih/kcal/{{food.of_energy.id}}">{{food.of_energy.name|fix_type_pre|markdown|smartypants|fix_type_post|strip_paras|safe}}</a></span>
+	</div>
+      </td>
+      
+      <td class="c{%if food.of_energy.kcal < 0%} neg{%endif%}">
+	{{food.of_energy.kcal|commas:'%i'|safe}}
+      </td>
+
+      <td class="c">
+	{{food.quantity|fractionalize|safe}}
+      </td>
+    </tr>
+
+    {% endfor %}
+    {% endfor %}
+</table>
+
+
+    {% endblock %}
+
+
+

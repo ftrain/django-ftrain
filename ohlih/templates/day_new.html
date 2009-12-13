@@ -1,0 +1,92 @@
+{% extends 'ohlih_base.html' %}
+
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+{% block title %}Calories consumed and expended.--{{month.name|date:"l, F j, Y"}}. (One Huge Lesson in Humility.){% endblock %}
+
+
+{% block content %}
+{% if events %}
+{% regroup events|dictsortreversed:"time" by time.date as grouped %}
+{% for day in grouped|slice:":1" %}
+
+<table class="ohlih" summary="Diary for {{day.list.0.time.date}}">
+  <thead>
+    <tr>
+      <th colspan="4">
+	<h2><a href="/ohlih/{{day.list.0.time.date|date:"Y/m/d"}}"><span class="day">{{day.list.0.time.date|date:"l, F j, Y"}}</span>.&mdash;<span class="diary">Diary</span>.</a></h2>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in day.list|dictsort:"time" %}
+    <tr>
+      <td class="r"{% if forloop.first %} rowspan="3"{%endif%}>
+	<a class="anchor" name="{{event.time|date:"H:i"}}" title="">{{event.event_type}}</a>
+      </td>
+      <td class="talk"{% if forloop.first %} rowspan="3"{%endif%}>
+	  {{event.commentary|hyphenate|fix_type_pre|markdown|smartypants|fix_type_post|safe}}
+      </td>
+      {% if forloop.first %}
+      <td colspan="2" class="c bg x top">
+	<a href="/ohlih/{{day.list.0.time.date|date:"Y/m"}}">{{day.list.0.time.date|date:"F Y"}}</a>
+      </td>
+      {% endif %}
+    </tr>
+    {% if forloop.first %}
+    <tr>
+      <td class="c bg x top">
+	{{ day|previous_day|safe }}
+      </td>
+      <td class="c bg x top">
+	{{ day|next_day|safe }}
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="s">Kilocalories</th>	
+      <th class="s">Quantity</th>
+    </tr>
+    {% endif %}
+    {% for food in event.food_set.all %}
+    <tr>
+      <td class="r">''</td>
+      <td class="dotted"><div class="foodItem"><span class="food">{{food.name|fix_type_pre|markdown|smartypants|fix_type_post|strip_paras|safe}}</span></div></td>
+      <td class="c{%if food.kcal < 0%} neg{%endif%}">{{food.kcal|commas:'%i'|safe}}</td>
+      <td class="c">{{food.quantity|fractionalize|safe}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="2"></td>
+      <td colspan="2" class="sum{%if event.food_set.all|sum_calories < 0%} neg{%endif%}">{{event.food_set.all|sum_calories|commas:'%i'|safe}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td class="r" colspan="2"></td>
+      <td colspan="2" class="totalsum">
+	<div class="hand">&#x261E;</div>
+	{% for total in day.list|sum_daily_calories %}
+	{% if forloop.first %}
+  	<i title="Total number of calories consumed">Total</i> {{total|commas:'%i'|safe}}
+	{% else %}
+ 	<i>({{total|commas:'%i'|safe}})</i>
+	{% endif %}
+	{% endfor %}
+	{% for total in day.list|sum_daily_calories %}
+	{% if forloop.first %}
+	<br/><i title="Number of calories outstanding, from a base of {{0|remaining|commas:'%i'}}">O/s</i> [{{0|remaining|commas:'%i'}}] {{total|remaining|commas:'%i'|safe}}
+	{% else %}
+ 	<i>({{total|remaining|commas:'%i'|safe}})</i>
+	{% endif %}
+	{% endfor %}
+    </td>
+    </tr>
+
+  </tbody>
+</table>
+{% endfor %}
+{% endif %}
+{% endblock %}

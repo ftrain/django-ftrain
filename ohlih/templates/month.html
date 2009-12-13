@@ -1,0 +1,82 @@
+{% extends 'ohlih_base.html' %}
+
+{% load ohlih_extras %}
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+
+{% block title %}Caloric Consumption/Expenditure.--{{month.name|date:"F Y"}} (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+<table class="ohlih">
+    <tr>
+      <th class="table-header" colspan="4">Caloric Consumption/Expenditure.&mdash;{{month.name|date:"F Y"}}</th>
+      <th class="c bg"><br/><a href="/ohlih/{{month.name|date:"Y"}}">{{month.name|date:"Y"}}</a></th>
+    </tr>
+    <tr>
+      <th style="border-bottom:none;" colspan="2"></th>
+      <th class="s">Input (Kcal.)</th>
+      <th class="s">Output</th>
+      <th class="s">Combined</th>
+    </tr>
+    
+    {% for day in days|dictsort:"day" %}
+    <tr>
+      <td class="img">
+	
+	{% if day.image %}
+	<a href="/ohlih/{{day.day_time|date:"Y/m/d"}}"><img src="{{ day.image.0.thumbnail_image.url }}" alt="{{ day.image.0.name}}"/></a>
+	{% endif %}
+      </td>
+      <td class="datelist"><div class="foodItem">
+	  <span class="food"><a href="/ohlih/{{day.day_time|date:"Y/m/d"}}">{{day.day_time|date:"jS <\i>D.</\i>"|safe}}</a></span></div></td>
+
+      <td class="c {%if day.input > max_cals %} over{%endif%}">{{day.input|commas:'%i'|safe}}</td>
+      <td class="c">{{day.output|commas:'%i'|safe}}</td>
+      <td class="c {%if day.combined > max_cals %} over{%endif%}">{{day.combined|commas:'%i'|safe}}</td>
+    </tr>
+    {% endfor %}
+    
+    <tr class="ds">
+      <td rowspan="3"></td>
+      <td class="datelist"><div class="foodItem"><span class="food">Total</span></div></td>
+      <td class="c" >{{month.sum.input|commas:'%i'|safe}}</td>
+      <td class="c">{{month.sum.output|commas:'%i'|safe}}</td>
+      <td class="c">{{month.sum.combined|commas:'%i'|safe}}</td>
+    </tr>
+    
+    <tr>
+      <td class="datelist"><div class="foodItem"><span class="food">Mean</span></div></td>
+      <td class="c">{{month.mean.input|commas:'%i'|safe}}</td>
+      <td class="c">{{month.mean.output|commas:'%i'|safe}}</td>
+      <td class="c">{{month.mean.combined|commas:'%i'|safe}}</td>
+    </tr>
+    
+    <tr>
+      <td class="datelist"><div class="foodItem"><span class="food">Median</span></div></td>
+      <td class="c">{{month.median.input|commas:'%i'|safe}}</td>
+      <td class="c">{{month.median.output|commas:'%i'|safe}}</td>
+      <td class="c">{{month.median.combined|commas:'%i'|safe}}</td>
+    </tr>
+    
+    <tr class="ss">
+      <td></td>
+      <td class="datelist"><div class="foodItem"><span class="food">Good days</span></div></td>
+      <td class="c">
+	<div class="fraction"><span class="numerator">{{good.input.days}}</span>/<span class="denominator">{{good.total_days}}</span></div>
+	{{good.input.percent}} %
+      </td>
+      
+      <td class="c">
+	<div class="fraction"><span class="numerator">{{good.output.days}}</span>/<span class="denominator">{{good.total_days}}</span></div>
+	{{good.output.percent}} %
+      </td>
+      
+      <td class="c">
+	<div class="fraction"><span class="numerator">{{good.combined.days}}</span>/<span class="denominator">{{good.total_days}}</span></div>
+	{{good.combined.percent}} %
+      </td>
+    </tr>
+</table>
+
+{% endblock %}

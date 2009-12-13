@@ -1,0 +1,27 @@
+{% extends 'ohlih_base.html' %}
+
+{% block title %}Calories consumed and expended.--{{events.0.time|date:"l, F j, Y"}}. (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+
+{% for e in event_all %}
+
+<div style="color:black;">
+  
+  <h3>{{ e.event_name }}</h3>
+  
+  <div>
+    --{{ e.image_all }}--
+    {{ e.commentary }} 
+  </div>
+  
+  {% for c in e.consumption_all %} 
+  <br/>{{ c }}
+
+  {% endfor %}  
+  {% endfor %}
+  
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'ohlih_base.html' %}
+
+{% load ohlih_extras %}
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+
+{% block title %}Caloric Consumption/Expenditure.--{{years.0.time|date:"Y"}} (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+<table class="ohlih">
+  <tr><th class="table-header" colspan="7">Caloric Consumption/Expenditure.&mdash;{{years.0.time|date:"Y"}}</th></tr>
+  <tr>
+    <th class="s">Mo.</th>
+    <th class="s">Wgt.</th>
+    <th class="s">Tot.</th>
+    <th class="s">Avg.</th>
+    <th class="s">Med.</th>
+    <th class="s">Max.</th>
+    <th class="s">Min.</th>
+  </tr>
+</table>
+<div style="color:black;">
+  {% for e in eats %}
+  <p>{{ e }}</p>
+  {% endfor %}
+  
+</div>
+{% endblock %}

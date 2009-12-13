@@ -1,0 +1,46 @@
+
+{#
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th class="s">Kilocal.</th>	
+      <th class="s">W/exercise</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  {% for day in grouped %}
+  <tr>
+    <td>
+      <a href="/ohlih/{{day.list.0.time.date|date:"Y/m/d"}}">{{day.list.0.time.date|date:"l, F j"}}</a>
+    </td>
+      {% for total in day.list|sum_daily_calories|dictsortreversed:"0" %}
+        <td class="c {% if total|remaining < 0 %} neg {%endif%}">{{total|commas:'%i'|safe}}</td>
+      {% endfor %}
+</tr>
+{% endfor %}
+
+  <tr>
+    <th>Total</th>
+    <td class="c">{{rsum|commas:'%i'|safe}}</td>
+    <td class="c">{{sum|commas:'%i'|safe}}</td>
+  </tr>
+
+  <tr>
+    <th>Average</th>
+    <td class="c">{{ravg|commas:'%i'|safe}}</td>
+    <td class="c">{{avg|commas:'%i'|safe}}</td>
+  </tr>
+
+  <tr>
+    <th>Median</th>
+    <td class="c">{{rmed}}</td>
+    <td class="c">{{med}}</td>
+
+  </tr>
+
+  </tbody>
+</table>
+#}

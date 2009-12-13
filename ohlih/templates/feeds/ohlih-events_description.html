@@ -1,0 +1,22 @@
+{% load markup %}
+{% load ohlih_extras %}
+
+
+<img src="{{obj.image_set.all.0.ohlih_image.url}}" alt="{{obj.image_set.all.0.ohlih_image.name}}"/>
+
+{{obj.commentary|fix_type_pre|markdown|smartypants|fix_type_post|safe}}
+
+<table>
+  <tr>
+    <th></th>
+    <td><i>Cal.</i></td>
+    <td><i>Quant.</i></td>
+  </tr>
+  {% for food in obj.consumption_set.all %}
+  <tr>
+    <td>{{food.of_energy.name|fix_type_pre|markdown|strip_paras|safe}}</td>
+    <td>{{food.of_energy.kcal|commas:'%i'|safe}}</td>
+    <td>{{food.quantity|fractionalize|safe}}</td>
+  </tr>
+  {% endfor %}
+</table>

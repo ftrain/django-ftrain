@@ -1,0 +1,28 @@
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+{% load ohlih_extras %}
+
+
+   <div class="dotcom">
+      <h3>{{object.title|safe}}</h3>
+
+      {% if object.subtitle %}
+      <h4>{{object.subtitle|safe}}</h4>
+      {% endif %}
+
+      <div class="date">{{object.time|safe}}</div>
+
+      {% if object.description %}
+      <div class="description">{{object.description|safe}}</div>
+      {% endif %}
+
+      <div class="post-body">
+      {{object.text|safe}}
+      </div>
+
+   </div>
+
+  </tbody>
+</table>
+

@@ -1,0 +1,54 @@
+{% extends 'ohlih_base.html' %}
+
+{% load ohlih_extras %}
+{% load smart_if %}
+{% load i18n %}
+{% load markup %}
+
+{% block title %}Caloric Consumption/Expenditure.--{{years.0.time|date:"Y"}} (One Huge Lesson in Humility.){% endblock %}
+
+{% block content %}
+<table class="ohlih">
+  <tr><th class="table-header" colspan="7">Caloric Consumption/Expenditure.&mdash;{{years.0.time|date:"Y"}}</th></tr>
+  <tr>
+    <th class="s">Mo.</th>
+    <th class="s">Wgt.</th>
+    <th class="s">Tot.</th>
+    <th class="s">Avg.</th>
+    <th class="s">Med.</th>
+    <th class="s">Max.</th>
+    <th class="s">Min.</th>
+  </tr>
+{% regroup years by time.date.month as months%}
+{% for month in months %}
+<tr>
+  <td class="x c bg"><a href="{{month.list.0.time.date|date:"Y/m"}}">{{month.list.0.time.date|date:"F"}}</a></td>
+  {% regroup month.list by time.date|date:"Y-m-d" as days%}
+  <td class="c x">{{days|weight_lost|commas:'%i'|safe}} <sup><i>lb.</i></sup></td>
+  {% for x in days|process_days %}
+  <td class="c x">{{x.sum|commas:'%i'|safe}}</td>
+  <td class="c x">{{x.mean|commas:'%i'|safe}}</td>
+  <td class="c x">{{x.median|commas:'%i'|safe}}</td>
+  <td class="c x">{{x.max|commas:'%i'|safe}}</td>
+  <td class="c x">{{x.min|commas:'%i'|safe}}</td>
+  {% endfor %}
+  </tr>
+
+{% regroup month.list|dictsort:'event_name.name' by event_name as types %}  
+{% for type in types %}
+  <tr>
+  <td class="c"><i>{{type.list.0.event_name}}</i></td>
+  {% for x in type.list|process_events %}
+  <td class="c">&quot;</td>
+  <td class="c">{{x.sum|commas:'%i'|safe}}</td>
+  <td class="c">{{x.mean|commas:'%i'|safe}}</td>
+  <td class="c">{{x.median|commas:'%i'|safe}}</td>
+  <td class="c">{{x.max|commas:'%i'|safe}}</td>
+  <td class="c">{{x.min|commas:'%i'|safe}}</td>
+  {% endfor %}
+  </tr>
+  {% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
