@@ -3,14 +3,20 @@ Ftrain.com code
 
 :Author: Paul Ford
 :Version: $Revision: 0001 $
-:Copyright: TK
+:Copyright: 2010-
 
 What is this?
 -------------
 
-This is the code that runs Ftrain.com. Actually, at this writing it _will_ run Ftrain.com, likely starting in February 2010. Right now I'm just getting things rolling so I can learn how Github works and thing about what's involved in sharing code.
+This is the code that runs just about everything at Ftrain.com.
 
-The code will most likely be useful for cutting-and-pasting, as it's rather specific to my purposes. That said, maybe someone else wants to play around with it, so here it is. OHLIH in particular might be handy for folks.
+- kcal -- diet and exercise blog
+- reviews -- small reviews of small things
+- features -- a blog to study the culture of software
+- dotcom -- a blog to handle "legacy" ftrain.com stuff
+- ads -- a fake ad server
+
+Nothing here is ready for launch. It's here in the spirit of cutting-and-pasting. Maybe someone else wants to play around with it, so here it is. OHLIH in particular might be handy for folks.
 
 TODO
 ----
