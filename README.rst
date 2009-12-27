@@ -8,7 +8,7 @@ Ftrain.com code
 What is this?
 -------------
 
-This is the code that runs just about everything at Ftrain.com.
+This is the code that runs just about everything at Ftrain.com (soon to relaunch). It contains these django apps:
 
 - kcal -- diet and exercise blog
 - reviews -- small reviews of small things
@@ -16,7 +16,7 @@ This is the code that runs just about everything at Ftrain.com.
 - dotcom -- a blog to handle "legacy" ftrain.com stuff
 - ads -- a fake ad server
 
-Nothing here is ready for launch. It's here in the spirit of cutting-and-pasting. Maybe someone else wants to play around with it, so here it is. OHLIH in particular might be handy for folks.
+There are a number of dependencies & nothing here is ready for launch. It's here in the spirit of cutting-and-pasting, and sharing. Maybe someone else wants to play around.
 
 TODO
 ----
