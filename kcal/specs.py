@@ -2,7 +2,7 @@ from imagekit.specs import ImageSpec
 from imagekit import processors 
 
 # now we define a display size resize processor
-class ResizeOhlih(processors.Resize):
+class ResizeKcal(processors.Resize):
     width = 360
 
 # first we define our thumbnail resize processor 
@@ -23,12 +23,12 @@ class Thumbnail(ImageSpec):
     processors = [ResizeThumb, EnhanceThumb] 
 
 # now we can define our thumbnail spec 
-class Ohlih(ImageSpec): 
-    access_as = 'ohlih_image' 
+class Kcal(ImageSpec): 
+    access_as = 'kcal_image' 
     pre_cache = True 
-    processors = [ResizeOhlih] 
+    processors = [ResizeKcal] 
 
 # and our display spec
 class Display(ImageSpec):
     increment_count = True
-    processors = [ResizeOhlih]
+    processors = [ResizeKcal]

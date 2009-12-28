@@ -102,7 +102,7 @@ class Image(ImageModel):
 #    objects = BatchManager()
     
     class IKOptions:
-        spec_module = 'ftrain.ohlih.specs'
+        spec_module = 'kcal.specs'
         cache_dir = 'photos'
         image_field = 'original_image'
         save_count_as = 'num_views'

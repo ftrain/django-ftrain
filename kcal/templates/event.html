@@ -3,7 +3,7 @@
       <td class="talk">
 
 {% if event.image_set.all.0 %}
-<p><a href="{{event.image_set.all.0.original_image.url}}"><img src="{{event.image_set.all.0.ohlih_image.url}}" alt="{{event.image_set.all.0.name}}" width="360"/></a></p>
+<p><a href="{{event.image_set.all.0.original_image.url}}"><img src="{{event.image_set.all.0.kcal_image.url}}" alt="{{event.image_set.all.0.name}}" width="360"/></a></p>
 {% endif %}
 {{event.commentary|hyphenate|fix_type_pre|markdown|smartypants|fix_type_post|safe}}</td>
       <td class="c"></td>

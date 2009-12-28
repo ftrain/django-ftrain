@@ -2,7 +2,7 @@ from django.contrib.syndication.feeds import Feed
 from django.utils import feedgenerator
 from models import Event
 
-class OhlihEventsFeed(Feed):
+class KcalEventsFeed(Feed):
     title = "One Huge Lesson in Humility, by Myself (Events)"
     link = "http://www.ohlih.com"
     subtitle = "Making the navel harder to gaze upon."
@@ -24,7 +24,7 @@ class OhlihEventsFeed(Feed):
     def item_pubdate(self, item):
         return item.time
 
-class OhlihDaysFeed(Feed):
+class KcalDaysFeed(Feed):
     title = "One Huge Lesson in Humility, by Myself (Days)"
     link = "http://www.ohlih.com"
     subtitle = "Making the navel harder to gaze upon."

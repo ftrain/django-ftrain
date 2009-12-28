@@ -1,8 +1,8 @@
 {% load markup %}
-{% load ohlih_extras %}
+{% load kcal_extras %}
 
 
-<img src="{{obj.image_set.all.0.ohlih_image.url}}" alt="{{obj.image_set.all.0.ohlih_image.name}}"/>
+<img src="{{obj.image_set.all.0.kcal_image.url}}" alt="{{obj.image_set.all.0.kcal_image.name}}"/>
 
 {{obj.commentary|fix_type_pre|markdown|smartypants|fix_type_post|safe}}
 

@@ -85,7 +85,7 @@ ROOT_URLCONF = 'ftrain.urls'
 
 TEMPLATE_DIRS = (
     "/home/ford/sites/ftrain.com/templates",
-    "/home/ford/sites/ftrain.com/ohlih/templates",
+    "/home/ford/sites/ftrain.com/kcal/templates",
 )
 
 INSTALLED_APPS = (
@@ -100,7 +100,7 @@ INSTALLED_APPS = (
 #    'photologue',
     'imagekit',
     'django_extensions',
-    'ftrain.ohlih',
+    'ftrain.kcal',
     'ftrain.dotcom',
     'ftrain.ads',
 )

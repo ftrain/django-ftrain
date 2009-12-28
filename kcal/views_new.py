@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from django.views.decorators.cache import cache_page
 from django.conf import settings
 
-from ftrain.ohlih.models import *
+from models import *
 
 @cache_page(20)
 def homepage(request):

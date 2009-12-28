@@ -38,7 +38,7 @@ class Image(ImageModel):
     cache_filename_format = "image/%(specname)s/%(filename)s.%(extension)s"
     
     class IKOptions:
-        spec_module = 'ftrain.leastreview.specs'
+        spec_module = 'reviews.specs'
         cache_dir = 'photos'
         image_field = 'original_image'
         save_count_as = 'num_views'

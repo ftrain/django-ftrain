@@ -1,8 +1,7 @@
 {% load smart_if %}
 {% load i18n %}
 {% load markup %}
-{% load ohlih_extras %}
-
+{% load kcal_extras %}
 
    <div class="dotcom">
       <h3>{{object.title|safe}}</h3>

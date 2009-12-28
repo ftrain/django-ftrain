@@ -4,10 +4,10 @@ from django.conf.urls.defaults import *
 # Feeds
 #-------------------------------------------------------------------------------
 
-from ftrain.ohlih.feeds import OhlihEventsFeed
-from ftrain.ohlih.feeds import OhlihDaysFeed
-# from ftrain.maryislaughing.feeds import MaryislaughingPostsFeed
-# from ftrain.leastreview.feeds import LeastreviewReviewsFeed
+from ftrain.kcal.feeds import KcalEventsFeed
+from ftrain.kcal.feeds import KcalDaysFeed
+# from ftrain.radio.feeds import MaryislaughingPostsFeed
+# from ftrain.reviews.feeds import LeastreviewReviewsFeed
 # from ftrain.dotcom.feeds import FtrainCompleteFeed
 
 urlpatterns = patterns('',)
@@ -25,7 +25,7 @@ urlpatterns = urlpatterns + patterns(
     (r'^admin/(.*)', admin.site.root),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^m/(?P<path>.*)$', 'django.views.static.serve', {'document_root':'/Users/ford/sites/ftrain.com/htdocs/m/'}),
-    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': {'ohlih-events': OhlihEventsFeed, 'ohlih-days': OhlihDaysFeed}}),
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': {'ohlih-events': KcalEventsFeed, 'ohlih-days': KcalDaysFeed}}),
     )
 
 #-------------------------------------------------------------------------------
@@ -52,23 +52,22 @@ urlpatterns = urlpatterns + patterns(
 #-------------------------------------------------------------------------------
 
 urlpatterns = urlpatterns + patterns('',
-
     # Ftrain
     (r'^dotcom/', include('ftrain.dotcom.urls')),
 
     # One Huge Lesson in Humility
-    (r'^ohlih/', include('ftrain.ohlih.urls')),
+    (r'^ohlih/', include('ftrain.kcal.urls')),
 
     # Mary is Laughing
-#    (r'^mary-is-laughing/', include('ftrain.maryislaughing.urls')),
+    (r'^mary-is-laughing/', include('ftrain.radio.urls')),
 
     # Least Review
-#    (r'^least-review/', include('ftrain.leastreview.urls')),
+    (r'^least-review/', include('ftrain.reviews.urls')),
 
     # "Advertising" server
     (r'^ads/', include('ftrain.ads.urls')),
 
     # Featurism
-#    (r'^featurism/', include('ftrain.featurism.urls')),
+    (r'^featurism/', include('ftrain.features.urls')),
   
 )

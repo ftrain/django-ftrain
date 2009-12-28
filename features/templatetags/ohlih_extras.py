@@ -4,7 +4,7 @@ from hyphen import hyphenator, dictools, config
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from ftrain.ohlih.models import Event
+from kcal.models import Event
 
 import re
 import os

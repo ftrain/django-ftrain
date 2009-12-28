@@ -1,9 +1,7 @@
 {% load smart_if %}
 {% load i18n %}
 {% load markup %}
-{% load ohlih_extras %}
-
-
+{% load kcal_extras %}
 
 <table summary="Diary for {{object.time.date}}" class="ohlih" cellspacing="0">
   <thead>

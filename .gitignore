@@ -11,5 +11,8 @@ logs/
 */.svn/
 *.sq3
 ./solr/
-
-
+manage*.py
+settings.py
+settings_home.py
+settings_work.py
+convert/

@@ -28,7 +28,7 @@ from matplotlib.dates import DateFormatter
 import itertools
 # Me
 
-from ftrain.ohlih.models import *
+from models import *
 
 @cache_page(30)
 def homepage(request):

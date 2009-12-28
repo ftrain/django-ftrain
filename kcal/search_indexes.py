@@ -2,11 +2,11 @@ from haystack import indexes
 from haystack import site
 import datetime
 
-from ohlih.models import Event
-import ohlih.models as ohlih
+from models import Event
+import models as kcal
 
 class EventIndex(indexes.SearchIndex):
-#    site = indexes.CharField(ohlih.MODEL_FULL_NAME)
+#    site = indexes.CharField(kcal.MODEL_FULL_NAME)
     title = indexes.CharField(model_attr='event_name')
     time = indexes.DateTimeField(model_attr='time')
     text = indexes.CharField(model_attr='commentary',document=True)
